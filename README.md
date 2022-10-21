@@ -23,18 +23,14 @@ Build an application that enables customers to find fintech professionals from a
 * Import ethereum transaction functions from `crypto_wallet.py` into the KryptoJobs2Go application in `krypto_jobs.py`.
 
 * Sign and execute a payment transaction on KryptoJobs2Go customer interface.
-  * Digitally sign a transaction that pays a KryptoJobs2Go candidate, and send this transaction to the Ganache blockchain.
+  * Digitally sign a transaction that pays a KryptoJobs2Go candidate, and send this transaction to the Ganache blockchain. Note the Total Wage in Ether.
 
 ![Choose a Fintech Professional to Hire](https://github.com/lrb924/Cryptocurrency_Wallet/blob/main/Images/Verification.png)
 
-* Note the Total Wage in Ether
-
 * Inspect the transaction on Ganache.
-  * Review the transaction hash code associated with the validated blockchain transaction.
+  * Review the transaction hash code associated with the validated blockchain transaction. Check the account balance, and see if it subtracted the Total Wage in Ether.
 
 ![Account Balance](https://github.com/lrb924/Cryptocurrency_Wallet/blob/main/Images/Account_Balance.png)
-
-* Check the account balance, and see if it subtracted the Total Wage in Ether
 
 ![Transaction Confirmation 1](https://github.com/lrb924/Cryptocurrency_Wallet/blob/main/Images/Transaction1.png)
 
