@@ -30,7 +30,7 @@ from dataclasses import dataclass
 from typing import Any, List
 from web3 import Web3
 
-w3 = Web3(Web3.HTTPProvider("HTTP://127.0.0.1:7545"))
+web3 = Web3(Web3.HTTPProvider("HTTP://127.0.0.1:7545"))
 ################################################################################
 # Step 1:
 # Import Ethereum Transaction Functions into the KryptoJobs2Go Application
@@ -80,7 +80,8 @@ w3 = Web3(Web3.HTTPProvider("HTTP://127.0.0.1:7545"))
 # @TODO:
 # From `crypto_wallet.py import the functions generate_account, get_balance,
 #  and send_transaction
-# YOUR CODE HERE
+
+from crypto_wallet import generate_account, get_balance, send_transaction
 
 ################################################################################
 # KryptoJobs2Go Candidate Information
@@ -121,7 +122,6 @@ candidate_database = {
 # A list of the KryptoJobs2Go candidates first names
 people = ["Lane", "Ash", "Jo", "Kendall"]
 
-
 def get_people():
     """Display the database of KryptoJobs2Go candidate information."""
     db_list = list(candidate_database.values())
@@ -139,6 +139,7 @@ def get_people():
 # Streamlit Code
 
 # Streamlit application headings
+
 st.markdown("# KryptoJobs2Go!")
 st.markdown("## Hire A Fintech Professional!")
 st.text(" \n")
@@ -156,11 +157,13 @@ st.sidebar.markdown("## Client Account Address and Ethernet Balance in Ether")
 
 # @TODO:
 #  Call the `generate_account` function and save it as the variable `account`
-# YOUR CODE HERE
+
+account = generate_account()
 
 ##########################################
 
 # Write the client's Ethereum account address to the sidebar
+
 st.sidebar.write(account.address)
 
 ##########################################
@@ -172,34 +175,44 @@ st.sidebar.write(account.address)
 # @TODO
 # Call `get_balance` function and pass it your account address
 # Write the returned ether balance to the sidebar
-# YOUR CODE HERE
+
+ether_balance = get_balance(web3, account.address)
+st.sidebar.write(ether_balance)
 
 ##########################################
 
 # Create a select box to chose a FinTech Hire candidate
+
 person = st.sidebar.selectbox("Select a Person", people)
 
 # Create a input field to record the number of hours the candidate worked
+
 hours = st.sidebar.number_input("Number of Hours")
 
 st.sidebar.markdown("## Candidate Name, Hourly Rate, and Ethereum Address")
 
 # Identify the FinTech Hire candidate
+
 candidate = candidate_database[person][0]
 
 # Write the KryptoJobs2Go candidate's name to the sidebar
+
 st.sidebar.write(candidate)
 
 # Identify the KryptoJobs2Go candidate's hourly rate
+
 hourly_rate = candidate_database[person][3]
 
 # Write the inTech Finder candidate's hourly rate to the sidebar
+
 st.sidebar.write(hourly_rate)
 
 # Identify the KryptoJobs2Go candidate's Ethereum Address
+
 candidate_address = candidate_database[person][1]
 
 # Write the inTech Finder candidate's Ethereum Address to the sidebar
+
 st.sidebar.write(candidate_address)
 
 # Write the KryptoJobs2Go candidate's name to the sidebar
@@ -263,11 +276,13 @@ st.sidebar.markdown("## Total Wage in Ether")
 # Calculate total `wage` for the candidate by multiplying the candidate’s hourly
 # rate from the candidate database (`candidate_database[person][3]`) by the
 # value of the `hours` variable
-# YOUR CODE HERE
+
+wage = hours * (candidate_database[person][3])
 
 # @TODO
 # Write the `wage` calculation to the Streamlit sidebar
-# YOUR CODE HERE
+
+st.sidebar.write(wage)
 
 ##########################################
 # Step 2 - Part 2:
@@ -287,26 +302,30 @@ st.sidebar.markdown("## Total Wage in Ether")
 # variable named `transaction_hash`, and have it display on the application’s
 # web interface.
 
-
 if st.sidebar.button("Send Transaction"):
 
     # @TODO
     # Call the `send_transaction` function and pass it 3 parameters:
     # Your `account`, the `candidate_address`, and the `wage` as parameters
     # Save the returned transaction hash as a variable named `transaction_hash`
-    # YOUR CODE HERE
+    
+    transaction_hash = send_transaction(web3, account, candidate_address, wage)
 
     # Markdown for the transaction hash
+    
     st.sidebar.markdown("#### Validated Transaction Hash")
 
     # Write the returned transaction hash to the screen
+    
     st.sidebar.write(transaction_hash)
 
     # Celebrate your successful payment
+    
     st.balloons()
 
 # The function that starts the Streamlit application
 # Writes KryptoJobs2Go candidates to the Streamlit page
+
 get_people()
 
 ################################################################################
