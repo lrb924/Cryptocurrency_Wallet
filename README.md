@@ -27,8 +27,14 @@ Build an application that enables customers to find fintech professionals from a
 
 ![Choose a Fintech Professional to Hire](https://github.com/lrb924/Cryptocurrency_Wallet/blob/main/Images/Verification.png)
 
+* Note the Total Wage in Ether
+
 * Inspect the transaction on Ganache.
   * Review the transaction hash code associated with the validated blockchain transaction.
+
+![Account Balance](https://github.com/lrb924/Cryptocurrency_Wallet/blob/main/Images/Account_Balance.png)
+
+* Check the account balance, and see if it subtracted the Total Wage in Ether
 
 ![Transaction Confirmation 1](https://github.com/lrb924/Cryptocurrency_Wallet/blob/main/Images/Transaction1.png)
 
